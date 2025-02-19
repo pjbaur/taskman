@@ -15,9 +15,6 @@ public class TaskmanApplication {
 
 	private static final Logger log = LoggerFactory.getLogger(TaskmanApplication.class);
 
-	@Autowired
-	TaskService taskService;
-
 	public static void main(String[] args) {
 		SpringApplication.run(TaskmanApplication.class, args);
 	}
@@ -48,12 +45,12 @@ public class TaskmanApplication {
 			log.info("");
 
 			// fetch tasks by status
-//			log.info("Tasks found with findByStatus('OPEN'):");
-//			log.info("---------------------------------------");
-//			repository.findByStatus("OPEN").forEach(openTask -> {
-//				log.info(openTask.toString());
-//			});
-
+			log.info("Tasks found with findByStatus('OPEN'):");
+			log.info("---------------------------------------");
+			repository.findByStatus("OPEN").forEach(openTask -> {
+				log.info(openTask.toString());
+			});
+			log.info("");
 		};
 	}
 }
