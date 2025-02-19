@@ -1,5 +1,6 @@
 package me.paulbaur.taskman;
 
+import me.paulbaur.taskman.model.Status;
 import me.paulbaur.taskman.model.Task;
 import me.paulbaur.taskman.repository.TaskRepository;
 import org.slf4j.Logger;
@@ -49,7 +50,7 @@ public class TaskmanApplication {
 			// fetch tasks by status
 			log.info("Tasks found with findByStatus('OPEN'):");
 			log.info("---------------------------------------");
-			repository.findByStatus("OPEN").forEach(openTask -> {
+			repository.findByStatus(Status.OPEN).forEach(openTask -> {
 				log.info(openTask.toString());
 			});
 			log.info("");
