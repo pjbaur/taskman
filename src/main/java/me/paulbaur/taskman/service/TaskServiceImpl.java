@@ -2,6 +2,7 @@ package me.paulbaur.taskman.service;
 
 import me.paulbaur.taskman.exception.ResourceNotFoundException;
 import me.paulbaur.taskman.model.Task;
+import me.paulbaur.taskman.model.Status;
 import me.paulbaur.taskman.repository.TaskRepository;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +30,8 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public Task createTask(Task task) {
-        // TODO: Any addtiional logic to be added here
+        // Set the task status to OPEN by default
+        task.setStatus(Status.OPEN);
         return taskRepository.save(task);
     }
 
