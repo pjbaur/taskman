@@ -1,6 +1,11 @@
 package me.paulbaur.taskman;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 
-public interface TaskRepository extends JpaRepository<Task, Long> {
+import java.util.List;
+
+public interface TaskRepository extends CrudRepository<Task, Long> {
+    List<Task> findByTitle(String title);
+
+    Task findById(long id);
 }

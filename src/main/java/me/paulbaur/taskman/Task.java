@@ -6,33 +6,31 @@ import java.util.Objects;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "tasks")
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+//    @Column(nullable = false)
     private String title;
 
-    @Column(length = 500)
+//    @Column(length = 500)
     private String description;
 
-    @Column(nullable = false)
+//    @Column(nullable = false)
     private String status;
 
-    @Column(name = "created_at", nullable = false, updatable = false)
+//    @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
-    @Column(name = "updated_at")
+//    @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
     // Constructors
-    public Task() {
+    protected Task() {
     }
 
-    public Task(Long id, String title, String description, String status, LocalDateTime createdAt) {
-        this.id = id;
+    public Task(String title, String description, String status, LocalDateTime createdAt) {
         this.title = title;
         this.description = description;
         this.status = status;
@@ -42,10 +40,6 @@ public class Task {
     // Getters and Setters
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getTitle() {
@@ -82,10 +76,6 @@ public class Task {
 
     public LocalDateTime getCreatedAt() {
         return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
     }
 
     @Override
