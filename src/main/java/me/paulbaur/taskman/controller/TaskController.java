@@ -1,5 +1,6 @@
 package me.paulbaur.taskman.controller;
 
+import io.swagger.annotations.ApiOperation;
 import me.paulbaur.taskman.model.Task;
 import me.paulbaur.taskman.service.TaskService;
 
