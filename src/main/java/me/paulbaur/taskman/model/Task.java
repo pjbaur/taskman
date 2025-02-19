@@ -1,4 +1,4 @@
-package me.paulbaur.taskman;
+package me.paulbaur.taskman.model;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -6,6 +6,7 @@ import java.util.Objects;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "tasks")
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,7 +19,7 @@ public class Task {
     private String description;
 
 //    @Column(nullable = false)
-    private String status;
+    private Status status;
 
 //    @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
@@ -26,15 +27,32 @@ public class Task {
 //    @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        this.updatedAt = LocalDateTime.now();
+    }
+
     // Constructors
     protected Task() {
     }
 
-    public Task(String title, String description, String status, LocalDateTime createdAt) {
+    public Task(String title, String description) {
+        this.title = title;
+        this.description = description;
+        this.status = Status.OPEN;
+//        this.createdAt = LocalDateTime.now();
+    }
+
+    public Task(String title, String description, Status status) {
         this.title = title;
         this.description = description;
         this.status = status;
-        this.createdAt = createdAt;
+//        this.createdAt = LocalDateTime.now();
     }
 
     // Getters and Setters
@@ -58,11 +76,11 @@ public class Task {
         this.description = description;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 

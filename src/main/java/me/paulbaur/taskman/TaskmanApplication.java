@@ -1,5 +1,7 @@
 package me.paulbaur.taskman;
 
+import me.paulbaur.taskman.model.Task;
+import me.paulbaur.taskman.repository.TaskRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,11 +25,11 @@ public class TaskmanApplication {
 	public CommandLineRunner demo(TaskRepository repository) {
 		return (args) -> {
 			// Create a few tasks
-			repository.save(new Task("Task 1", "This is the first task", "OPEN", LocalDateTime.now()));
-			repository.save(new Task("Task 2", "This is the second task", "IN_PROGRESS", LocalDateTime.now()));
-			repository.save(new Task("Task 3", "This is the third task", "DONE", LocalDateTime.now()));
-			repository.save(new Task("Task 4", "This is the fourth task", "OPEN", LocalDateTime.now()));
-			repository.save(new Task("Task 5", "This is the fifth task", "IN_PROGRESS", LocalDateTime.now()));
+			repository.save(new Task("Task 1", "This is the first task"));
+			repository.save(new Task("Task 2", "This is the second task"));
+			repository.save(new Task("Task 3", "This is the third task"));
+			repository.save(new Task("Task 4", "This is the fourth task"));
+			repository.save(new Task("Task 5", "This is the fifth task"));
 
 			// fetch all tasks
 			log.info("Tasks found with findAll():");
