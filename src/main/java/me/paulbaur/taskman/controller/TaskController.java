@@ -1,6 +1,5 @@
 package me.paulbaur.taskman.controller;
 
-import io.swagger.annotations.ApiOperation;
 import me.paulbaur.taskman.model.Task;
 import me.paulbaur.taskman.service.TaskService;
 
@@ -10,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
 @RequestMapping("/tasks")
 public class TaskController {
 
