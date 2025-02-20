@@ -45,14 +45,19 @@ public class Task {
         this.title = title;
         this.description = description;
         this.status = Status.OPEN;
-//        this.createdAt = LocalDateTime.now();
     }
 
     public Task(String title, String description, Status status) {
         this.title = title;
         this.description = description;
         this.status = status;
-//        this.createdAt = LocalDateTime.now();
+    }
+
+    public Task(Long id, String title, String description, Status status) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.status = status;
     }
 
     // Getters and Setters
