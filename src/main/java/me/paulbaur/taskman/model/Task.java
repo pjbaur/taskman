@@ -3,6 +3,7 @@ package me.paulbaur.taskman.model;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 @Entity
@@ -10,21 +11,27 @@ import jakarta.persistence.*;
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonProperty("id")
     private Long id;
 
-//    @Column(nullable = false)
+    @Column(nullable = false)
+    @JsonProperty("title")
     private String title;
 
-//    @Column(length = 500)
+    @Column(length = 500)
+    @JsonProperty("description")
     private String description;
 
-//    @Column(nullable = false)
+    @Column(nullable = false)
+    @JsonProperty("status")
     private Status status;
 
-//    @Column(name = "created_at", nullable = false, updatable = false)
+    @Column(name = "created_at", nullable = false, updatable = false)
+    @JsonProperty("created_at")
     private LocalDateTime createdAt;
 
-//    @Column(name = "updated_at")
+    @Column(name = "updated_at")
+    @JsonProperty("updated_at")
     private LocalDateTime updatedAt;
 
     @PrePersist
