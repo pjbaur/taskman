@@ -27,9 +27,9 @@ public class TaskmanApplication {
 		return (args) -> {
 			// Create a few tasks
 			repository.save(new Task("Task 1", "This is the first task"));
-			repository.save(new Task("Task 2", "This is the second task"));
+			repository.save(new Task("Task 2", "This is the second task", Status.IN_PROGRESS));
 			repository.save(new Task("Task 3", "This is the third task"));
-			repository.save(new Task("Task 4", "This is the fourth task"));
+			repository.save(new Task("Task 4", "This is the fourth task", Status.IN_PROGRESS));
 			repository.save(new Task("Task 5", "This is the fifth task"));
 
 			// fetch all tasks
