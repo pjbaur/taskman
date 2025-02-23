@@ -1,7 +1,7 @@
 package me.paulbaur.taskman.service;
 
 import me.paulbaur.taskman.model.Task;
-import me.paulbaur.taskman.controller.TaskController;
+import me.paulbaur.taskman.controller.TaskControllerV1;
 import me.paulbaur.taskman.exception.GlobalExceptionHandler;
 import me.paulbaur.taskman.model.Status;
 
@@ -19,7 +19,7 @@ import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-public class TaskControllerTest {
+public class TaskControllerV1Test {
 
     private MockMvc mockMvc;
     private TaskService taskService;
@@ -28,7 +28,7 @@ public class TaskControllerTest {
     @BeforeEach
     public void setup() {
         taskService = mock(TaskService.class);
-        mockMvc = MockMvcBuilders.standaloneSetup(new TaskController(taskService))
+        mockMvc = MockMvcBuilders.standaloneSetup(new TaskControllerV1(taskService))
                 .setControllerAdvice(new GlobalExceptionHandler())
                 .build();
         objectMapper = new ObjectMapper();
@@ -41,7 +41,7 @@ public class TaskControllerTest {
 
         when(taskService.getAllTasks()).thenReturn(Arrays.asList(task1, task2));
 
-        mockMvc.perform(get("/tasks"))
+        mockMvc.perform(get("/api/v1/tasks"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.size()").value(2))
                 .andExpect(jsonPath("$[0].title").value("Task 1"))
@@ -55,7 +55,7 @@ public class TaskControllerTest {
         Task task = new Task(1L, "Task 1", "Description 1", Status.IN_PROGRESS);
         when(taskService.getTaskById(1L)).thenReturn(Optional.of(task));
 
-        mockMvc.perform(get("/tasks/1"))
+        mockMvc.perform(get("/api/v1/tasks/1"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.title").value("Task 1"))
                 .andExpect(jsonPath("$.description").value("Description 1"));
@@ -67,7 +67,7 @@ public class TaskControllerTest {
     public void testGetTaskById_NotFound() throws Exception {
         when(taskService.getTaskById(1L)).thenReturn(Optional.empty());
 
-        mockMvc.perform(get("/tasks/1"))
+        mockMvc.perform(get("/api/v1/tasks/1"))
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.status").value(404))
                 .andExpect(jsonPath("$.message").value("Task not found with id 1"))
@@ -83,7 +83,7 @@ public class TaskControllerTest {
 
         when(taskService.createTask(any(Task.class))).thenReturn(savedTask);
 
-        mockMvc.perform(post("/tasks")
+        mockMvc.perform(post("/api/v1/tasks")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(task)))
                 .andExpect(status().isOk())

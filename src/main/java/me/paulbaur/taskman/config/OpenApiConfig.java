@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @OpenAPIDefinition(info = @io.swagger.v3.oas.annotations.info.Info(
         title = "Task Manager API",
-        version = "1.0",
+        version = "1.0.0",
         description = "Backend REST API for a Task Manager application"))
 public class OpenApiConfig {
 

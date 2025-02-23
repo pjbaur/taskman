@@ -16,12 +16,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/tasks")
-public class TaskController {
+@RequestMapping("/api/v1/tasks")
+public class TaskControllerV1 {
 
     private final TaskService taskService;
 
-    public TaskController(TaskService taskService) {
+    public TaskControllerV1(TaskService taskService) {
         this.taskService = taskService;
     }
 

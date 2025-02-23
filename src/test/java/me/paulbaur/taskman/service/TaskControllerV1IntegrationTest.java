@@ -23,7 +23,7 @@ import java.util.Optional;
 @SpringBootTest
 @AutoConfigureMockMvc
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class TaskControllerIntegrationTest {
+public class TaskControllerV1IntegrationTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -41,7 +41,7 @@ public class TaskControllerIntegrationTest {
     public void testCreateTask() throws Exception {
         Task task = new Task(null, "Integration Task", "Integration Description", Status.IN_PROGRESS);
 
-        String response = mockMvc.perform(post("/tasks")
+        String response = mockMvc.perform(post("/api/v1/tasks")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(task)))
                 .andExpect(status().isOk())
@@ -55,7 +55,7 @@ public class TaskControllerIntegrationTest {
     @Test
     @Order(2)
     public void testGetTaskById() throws Exception {
-        mockMvc.perform(get("/tasks/" + taskId))
+        mockMvc.perform(get("/api/v1/tasks/" + taskId))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.title").value("Integration Task"));
     }
@@ -65,7 +65,7 @@ public class TaskControllerIntegrationTest {
     public void testUpdateTask() throws Exception {
         Task updatedTask = new Task(taskId, "Updated Integration Task", "Updated Description", Status.COMPLETED);
 
-        mockMvc.perform(put("/tasks/" + taskId)
+        mockMvc.perform(put("/api/v1/tasks/" + taskId)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(updatedTask)))
                 .andExpect(status().isOk())
@@ -75,7 +75,7 @@ public class TaskControllerIntegrationTest {
     @Test
     @Order(4)
     public void testDeleteTask() throws Exception {
-        mockMvc.perform(delete("/tasks/" + taskId))
+        mockMvc.perform(delete("/api/v1/tasks/" + taskId))
                 .andExpect(status().isOk());
 
         Optional<Task> deletedTask = taskRepository.findById(taskId);
