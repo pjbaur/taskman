@@ -1,5 +1,6 @@
 package me.paulbaur.taskman.config;
 
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.models.ExternalDocumentation;
 import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
@@ -9,24 +10,21 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+@OpenAPIDefinition(info = @io.swagger.v3.oas.annotations.info.Info(
+        title = "Simple API Demo",
+        version = "1.0",
+        description = "Demo API Documentation"))
 public class OpenApiConfig {
 
     @Bean
     public OpenAPI taskManagerOpenAPI() {
         return new OpenAPI()
-                .info(new Info()
-                        .title("Task Manager API")
-                        .description("Task Manager API implemented with Spring Boot")
-                        .version("v1.0.0")
-                        .license(new License()
-                                .name("MIT")
-                                .url("http://springdoc.org"))
+                .info(new io.swagger.v3.oas.models.info.Info()
+                        .title("Custom API Title")
+                        .version("1.0.0")
                         .contact(new Contact()
-                            .name("Paul Baur")
-                            .email("paul.baur@gmail.com")
-                            .url("https://www.linkedin.com/in/paul-baur/")))
-                .externalDocs(new ExternalDocumentation()
-                        .description("Project Repository")
-                        .url("https://github.com/pjbaur/taskman"));
+                                .name("Support")
+                                .email("support@example.com"))
+                        .description("API Documentation"));
     }
 }
